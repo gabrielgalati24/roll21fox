@@ -16,8 +16,8 @@ module.exports.io = require('socket.io')(server,
 
   {
       cors: {
-    origin: "http://localhost:3000",
-    // origin: "https://cpanel-a8fd6.web.app",
+    // origin: "http://localhost:3000",
+    origin: "https://cpanel-a8fd6.web.app",
     methods: ["GET", "POST"],
   },
 
