@@ -8,6 +8,8 @@ app.use( express.json() );
 const server = require('http').createServer(app);
 const PORT = process.env.PORT || 3001
 
+// inicio base de datos moongose
+require('./database/config_moongose').dbConnection();
 
 // creamos y exportamos el socket
 module.exports.io = require('socket.io')(server,
