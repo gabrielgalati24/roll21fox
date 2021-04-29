@@ -32,8 +32,8 @@ export default function Prueba(){
         //     }
         //   }, []);
         useEffect(() => {
-        // const s:any = io("https://futanarichatfox.herokuapp.com/")
-        const s:any = io("http://localhost:3001")
+        const s:any = io("https://futanarichatfox.herokuapp.com/")
+        // const s:any = io("http://localhost:3001")
         setSocket(s)
     
         return () => {
@@ -65,28 +65,33 @@ setpos({
 
        const handleStop=(e:any)=>{
 console.log(e)
+let posicionX:number = e.layerX - e.offsetX
+let posicionY:number = e.layerY - e.offsetY
         //    setPx(e.clientX -e.offsetX)
         //    setPy(e.clientY -e.offsetY)
+        if( posicionX  > 510 || posicionY > 500) return
         setpos({
-            x:e.layerX - e.offsetX,
-            y:e.layerY -  e.offsetY
+            x:posicionX,
+            y:posicionY
         })
         if (socket == null || socket === undefined ) return
         socket.emit("prueba",{
             id:1,
              pos:{
-                x:e.layerX - e.offsetX,
-                y:e.layerY -  e.offsetY
+                x:posicionX,
+                y:posicionY
              }
         })
 
 
                 }
                 const handleStop1=(e:any)=>{
-    
-
-
-         
+                    let fixedElem = document.createElement('div');
+                    fixedElem.style.cssText = 'position:fixed; top: 0; left: 0';
+                    document.body.appendChild(fixedElem);
+                    const rect = fixedElem.getBoundingClientRect();
+                    document.body.removeChild(fixedElem);
+                    console.log(rect)
          
                          }
  
