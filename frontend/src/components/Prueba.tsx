@@ -75,8 +75,8 @@ console.log(e)
         socket.emit("prueba",{
             id:1,
              pos:{
-                x:e.clientX -e.offsetX,
-                y:e.clientY -e.offsetY
+                x:e.layerX - e.offsetX,
+                y:e.layerY -  e.offsetY
              }
         })
 
