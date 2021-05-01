@@ -13,17 +13,21 @@ interface Position{
     x:number,
     y:number
 }
+ interface Canvas{
+    canvasWith:number
+    canvasHeight:number
+ }
 
 
-
-export default function Prueba(){
+export default function Prueba(props: { x: number, y: number, id:number }){
 //  const objecto =createRef(null)
     const [dimensions, setDimensions] = useState(null);
-
+        let canvasWith  = 500
+        let canvasHeight = 500
         const [socket, setSocket] = useState<Socket>()
         const[pos,setpos] = useState<Position>({
-            x:10,
-            y:10
+            x:props.x,
+            y:props.y
         })
 
         // const callBackRef = useCallback(domNode => {
@@ -32,8 +36,8 @@ export default function Prueba(){
         //     }
         //   }, []);
         useEffect(() => {
-        const s:any = io("https://futanarichatfox.herokuapp.com/")
-        // const s:any = io("http://localhost:3001")
+        // const s:any = io("https://futanarichatfox.herokuapp.com/")
+        const s:any = io("http://localhost:3001")
         setSocket(s)
     
         return () => {
@@ -49,9 +53,12 @@ export default function Prueba(){
 useEffect(()=>{
 // console.log(objecto.current?.getBoundingClientRect())
 
-    if (socket == null || socket === undefined ) return
+    if (socket == null || socket === undefined  ) return
     socket.on('prueba1',(delta:any)=>{
-        console.log('enviando',delta)
+        // console.log('enviando',delta)
+        if(delta.id !== props.id) return
+
+    console.log(delta.id,"  ", props.id)
 setpos({
     x:delta.pos.x,
     y:delta.pos.y
@@ -64,19 +71,19 @@ setpos({
 
 
        const handleStop=(e:any)=>{
-console.log(e)
+// console.log(e)
 let posicionX:number = e.layerX - e.offsetX
 let posicionY:number = e.layerY - e.offsetY
         //    setPx(e.clientX -e.offsetX)
         //    setPy(e.clientY -e.offsetY)
-        if( posicionX  > 510 || posicionY > 500) return
+        if( posicionX  > canvasWith || posicionY > canvasHeight) return
         setpos({
             x:posicionX,
             y:posicionY
         })
         if (socket == null || socket === undefined ) return
         socket.emit("prueba",{
-            id:1,
+            id:props.id,
              pos:{
                 x:posicionX,
                 y:posicionY
@@ -91,7 +98,7 @@ let posicionY:number = e.layerY - e.offsetY
                     document.body.appendChild(fixedElem);
                     const rect = fixedElem.getBoundingClientRect();
                     document.body.removeChild(fixedElem);
-                    console.log(rect)
+                    // console.log(rect)
          
                          }
  
