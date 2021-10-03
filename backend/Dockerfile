@@ -6,7 +6,7 @@ COPY . /app
 
 RUN npm install
 
-EXPOSE 3001
+EXPOSE 8000
 
 
 
