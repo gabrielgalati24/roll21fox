@@ -6,7 +6,7 @@ const app = express();
 // Lectura y parseo del Body
 app.use( express.json() );
 const server = require('http').createServer(app);
-const PORT = 3001
+const PORT = 8000;
 
 // inicio base de datos moongose
 require('./database/config_moongose').dbConnection();
