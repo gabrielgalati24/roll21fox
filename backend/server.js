@@ -6,7 +6,7 @@ const app = express();
 // Lectura y parseo del Body
 app.use( express.json() );
 const server = require('http').createServer(app);
-const PORT = process.env.PORT || 3001
+const PORT = 3001
 
 // inicio base de datos moongose
 require('./database/config_moongose').dbConnection();
@@ -16,7 +16,7 @@ module.exports.io = require('socket.io')(server,
 
   {
       cors: {
-    origin: "http://localhost:3000",
+    origin: "https://woler.xyz/",
     // origin: "https://cpanel-a8fd6.web.app",
     methods: ["GET", "POST"],
   },
